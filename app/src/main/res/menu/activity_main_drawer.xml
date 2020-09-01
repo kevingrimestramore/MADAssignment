@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_dashboard"
+            android:icon="@drawable/dashboard_icon"
+            android:title="Dashboard" />
+
+        <item
+            android:id="@+id/nav_alarms"
+            android:icon="@drawable/alarm_icon"
+            android:title="Alarms" />
+
+        <item
+            android:id="@+id/nav_notes"
+            android:icon="@drawable/notes_icon"
+            android:title="Notes" />
+
+        <item
+            android:id="@+id/nav_weather"
+            android:icon="@drawable/weather_icon"
+            android:title="Weather" />
+
+    </group>
+
+
+    <group android:checkableBehavior="single">
+
+        <item android:title="Profile">
+
+            <menu>
+
+                <item
+                    android:id="@+id/nav_logout"
+                    android:icon="@drawable/logout_icon"
+                    android:title="Logout" />
+
+            </menu>
+
+        </item>
+    </group>
+
+    <item android:title="Troubleshooting">
+
+        <menu>
+
+            <item
+                android:id="@+id/nav_contact"
+                android:icon="@drawable/contact_icon"
+                android:title="Contact" />
+
+        </menu>
+    </item>
+</menu>

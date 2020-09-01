@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="@color/colorAccent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Send a query to the developer:"
+        android:padding="15dp"
+        android:textSize="18dp"
+        android:textColor="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/recipient"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/email_textedit"
+        android:text="20089581@mail.wit.ie"
+        android:padding="15dp"
+        android:textColor="@color/black" />
+
+    <EditText
+        android:id="@+id/subject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/email_textedit"
+        android:hint="Subject"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:inputType="text|textCapSentences"
+        android:padding="15dp"
+        android:textColor="@color/black" />
+
+    <EditText
+        android:id="@+id/message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/email_textedit"
+        android:gravity="start"
+        android:hint="Enter message here..."
+        android:inputType="text|textCapSentences"
+        android:minHeight="150dp"
+        android:padding="15dp"
+        android:textColor="@color/black" />
+
+    <Button
+        android:id="@+id/sendEmailBtn"
+        style="@style/Base.Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:textColor="@color/colorPrimary"
+        android:padding="15dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="Send Email" />
+</LinearLayout>
