@@ -13,6 +13,11 @@ import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
 
+
+//    Login activity connects to AuthUI login flow, allows user to connect via email or Google (partially implemented)
+//
+//
+//
     companion object {
         private const val RC_SIGN = 123
     }

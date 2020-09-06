@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Lounge</string>
+
+    <!--Nav strings-->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">User Name</string>
@@ -7,25 +9,44 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Contact</string>
 
+    <!--Menu strings-->
     <string name="menu_dashboard">Dashboard</string>
     <string name="menu_alarms">Alarms</string>
     <string name="menu_notes">Notes</string>
     <string name="menu_weather">Weather</string>
+    <string name="menu_steps">Steps</string>
+    <string name="menu_contact">Contact</string>
 
+    <!--Login Fragment strings-->
     <string name="login_button_text">Login</string>
     <string name="logout_button_text">Logout</string>
     <string name="login_unsuccessful_msg">Login unsuccessful</string>
-    <string name="welcome_message">It\'s currently %1$s.</string>
-    <string name="welcome_message_authed">Hi %1$s! Did you know that %2$s.</string>
     <string name="login_prompt">Login to save your data!</string>
     <string name="login_btn">Login</string>
     <string name="settings_btn">Settings</string>
 
-    <!--Shared Preference Keys -->
-    <string name="preference_fact_type_key">fact_type_pref</string>
+    <!--Alarm Fragment strings-->
+    <string name="notification_title">Nap timer</string>
+    <string name="notification_text">Countdown complete!</string>
+    <string name="nap_prompt">How long would you like to nap?</string>
+    <string name="alarm_finish">Nap over, get up!</string>
+    <string name="alarm_notification_channel_id" translatable="false">alarm_channel</string>
+    <string name="alarm_notification_channel_name" translatable="true">Alarm</string>
+    <string name="timer_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="timer_notification_channel_name" translatable="true">Timer</string>
+    <string name="snooze">Snooze</string>
+    <string name="timer_notification_channel_description">Nap reminder</string>
 
-    <string name="menu_contact">Contact</string>
+    <!--Steps Fragment strings-->
+    <string name="step_header">Today\'s Step Count: </string>
+    <string name="step_total">Click below for today\'s step count!</string>
+    <string name="refresh_button">Refresh!</string>
+    <string name="permission_rationale">Location data is used as part of the Google Fit API</string>
+    <string name="permission_denied_explanation">Permission was denied, but is needed for core
+        functionality.</string>
+    <string name="ok">OK</string>
 
+    <!--Splash strings-->
     <string name="intro_message">Developed by Kevin Grimes</string>
 
 </resources>

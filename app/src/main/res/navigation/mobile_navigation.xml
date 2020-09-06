@@ -15,7 +15,7 @@
         android:id="@+id/nav_alarms"
         android:name="ie.wit.madassignment.ui.alarms.AlarmsFragment"
         android:label="@string/menu_alarms"
-        tools:layout="@layout/fragment_alarms" />
+        tools:layout="@layout/fragment_alarm" />
 
     <fragment
         android:id="@+id/nav_notes"
@@ -28,6 +28,12 @@
         android:name="ie.wit.madassignment.ui.weather.WeatherFragment"
         android:label="@string/menu_weather"
         tools:layout="@layout/fragment_weather" />
+
+    <fragment
+        android:id="@+id/nav_steps"
+        android:name="ie.wit.madassignment.ui.steps.StepsFragment"
+        android:label="@string/menu_steps"
+        tools:layout="@layout/fragment_steps" />
 
     <fragment
         android:id="@+id/nav_contact"

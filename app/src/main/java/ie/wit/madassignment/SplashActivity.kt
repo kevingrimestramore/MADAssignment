@@ -7,7 +7,8 @@ import ie.wit.madassignment.R
 
 class SplashActivity : AppCompatActivity() {
 
-    // This is the loading time of the splash screen
+// *** Splash activity not recognised in Android Manifest despite troubleshooting efforts
+//    layout file and timer present
     private val SPLASH_TIME_OUT:Long = 3000 // 1 sec
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,12 +16,7 @@ class SplashActivity : AppCompatActivity() {
 
 
         Handler().postDelayed({
-            // This method will be executed once the timer is over
-            // Start your app main activity
-
             startActivity(Intent(this, MainActivity::class.java))
-
-            // close this activity
             finish()
         }, SPLASH_TIME_OUT)
     }

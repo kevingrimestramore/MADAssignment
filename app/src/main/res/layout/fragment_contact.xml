@@ -6,14 +6,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
-    android:background="@color/colorAccent"
+
     tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/hint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Send a query to the developer:"
         android:padding="15dp"
         android:textSize="18dp"
         android:textColor="@color/colorPrimary" />

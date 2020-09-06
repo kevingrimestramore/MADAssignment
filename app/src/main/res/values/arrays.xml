@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!--Alarm intervals -->
+    <string-array name="nap_array">
+        <item>Super Micro Nap (Test)</item>
+        <item>Tiny Nap</item>
+        <item>Short Nap</item>
+        <item>Medium Nap</item>
+        <item>Long nap</item>
+    </string-array>
+
+    <!-- Alarm time-->
+    <integer-array name="minutes_array">
+        <item>0</item>
+        <item>5</item>
+        <item>15</item>
+        <item>30</item>
+        <item>45</item>
+    </integer-array>
+</resources>

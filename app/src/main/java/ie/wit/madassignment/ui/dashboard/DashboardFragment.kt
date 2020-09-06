@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -24,17 +25,20 @@ class DashboardFragment : Fragment() {
     ): View? {
         dashboardViewModel =
                 ViewModelProviders.of(this).get(DashboardViewModel::class.java)
+
         val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
         val textView: TextView = root.findViewById(R.id.text_dashboard)
+        val button = root.findViewById<Button>(R.id.btn_logout);
+
         dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
-        btn_logout.setOnClickListener {
-            AuthUI.getInstance().signOut(this).addOnSuccessListener {
-                Toast.makeText(this, "Logged out!", Toast.LENGTH_SHORT).show()
+        button.setOnClickListener {
+//            AuthUI.getInstance().signOut(this).addOnSuccessListener {
+                Toast.makeText(context, "Logged out!", Toast.LENGTH_SHORT).show()
             }
 
-        }
+//        }
         return root
 
 
