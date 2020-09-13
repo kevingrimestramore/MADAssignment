@@ -11,12 +11,16 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.firebase.ui.auth.AuthUI
+import ie.wit.madassignment.Login
+import ie.wit.madassignment.MainActivity
 import ie.wit.madassignment.R
+import ie.wit.madassignment.main.LoungeApp
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 
 class DashboardFragment : Fragment() {
 
     private lateinit var dashboardViewModel: DashboardViewModel
+    lateinit var app: LoungeApp
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -34,13 +38,18 @@ class DashboardFragment : Fragment() {
             textView.text = it
         })
         button.setOnClickListener {
-//            AuthUI.getInstance().signOut(this).addOnSuccessListener {
+                signOut()
                 Toast.makeText(context, "Logged out!", Toast.LENGTH_SHORT).show()
+
             }
 
-//        }
         return root
+    }
 
+    private fun signOut()
+    {
+        (activity as Login).updateUI(null)
+        app.auth.signOut()
 
     }
 }

@@ -12,7 +12,7 @@ import androidx.databinding.DataBindingUtil.setContentView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import ie.wit.madassignment.LoginActivity
+import ie.wit.madassignment.Login
 import ie.wit.madassignment.MainActivity
 import ie.wit.madassignment.R
 import ie.wit.madassignment.ui.dashboard.DashboardViewModel
@@ -40,11 +40,9 @@ class ContactFragment : Fragment() {
 
 
             Toast.makeText(context, "Email intent launched!", Toast.LENGTH_SHORT).show()
-//            sendEmail(recipient, subject, message)
+            (activity as MainActivity).sendEmail(recipient, subject, message)
+
         }
-
-
-
 
         contactViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
@@ -52,24 +50,3 @@ class ContactFragment : Fragment() {
         return root
     }
 }
-//        setContentView(R.layout.fragment_contact)
-//        sendEmailBtn.setOnClickListener {
-//            var recipient = recipient.text.toString().trim()
-//            var subject = subject.text.toString().trim()
-//            var message = message.text.toString().trim()
-//
-//            sendEmail(recipient, subject, message)
-//        }
-//    }
-
-//
-//      public fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        val id = item.itemId
-//        if (id == R.id.back) {
-//            startActivity((Intent(this, MainActivity)))
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
-
-//
-//}

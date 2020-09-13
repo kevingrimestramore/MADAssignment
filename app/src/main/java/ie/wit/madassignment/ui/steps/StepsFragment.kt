@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import ie.wit.madassignment.FitActionRequestCode
+import ie.wit.madassignment.MainActivity
 import ie.wit.madassignment.R
 
 class StepsFragment : Fragment() {
@@ -29,10 +29,8 @@ class StepsFragment : Fragment() {
 
         val button = root.findViewById<Button>(R.id.button);
 
-//      *** Calls Readdata function from mainactivity, which updates step total digit and circular progress bar in steps fragment
         button.setOnClickListener {
-//            fitSignIn(FitActionRequestCode.READ_DATA)
-            Toast.makeText(context, "Updated total!", Toast.LENGTH_SHORT).show()
+            (activity as MainActivity).readData()
         }
 
         stepsViewModel.text.observe(viewLifecycleOwner, Observer {
