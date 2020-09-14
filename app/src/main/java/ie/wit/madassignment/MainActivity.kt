@@ -3,16 +3,12 @@ package ie.wit.madassignment
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
-import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.ActionBarDrawerToggle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -24,26 +20,22 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
-import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
-import com.firebase.ui.auth.AuthUI
-import com.firebase.ui.auth.data.model.Resource
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.fitness.Fitness
 import com.google.android.gms.fitness.FitnessOptions
 import com.google.android.gms.fitness.data.DataType
 import com.google.android.gms.fitness.data.Field
-import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import ie.wit.madassignment.databinding.ActivityMainBinding
 import ie.wit.madassignment.main.LoungeApp
 import ie.wit.madassignment.ui.contact.ContactFragment
-import ie.wit.madassignment.Login
-import kotlinx.android.synthetic.main.activity_main.view.*
+import ie.wit.madassignment.ui.notes.Task
+import ie.wit.madassignment.ui.notes.TaskAdapter
+import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.fragment_notes.*
 import kotlinx.android.synthetic.main.fragment_steps.*
-import kotlinx.android.synthetic.main.nav_header_main.*
-import kotlinx.android.synthetic.main.nav_header_main.view.*
-import org.w3c.dom.Text
 
 const val TAG = "StepCounter"
 
@@ -54,7 +46,6 @@ enum class FitActionRequestCode {
 
 class MainActivity : AppCompatActivity() {
 
-    //    *** Google fit data
     private val fitnessOptions = FitnessOptions.builder()
         .addDataType(DataType.TYPE_STEP_COUNT_CUMULATIVE)
         .addDataType(DataType.TYPE_STEP_COUNT_DELTA)
@@ -70,7 +61,12 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     lateinit var app: LoungeApp
 
+    lateinit var _db: DatabaseReference
+//    lateinit var _adapter: TaskAdapter
+
     private lateinit var appBarConfiguration: AppBarConfiguration
+//    var _taskList: MutableList? = null
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,6 +75,8 @@ class MainActivity : AppCompatActivity() {
 
         checkPermissionsAndRun(FitActionRequestCode.SUBSCRIBE)
 
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true)
+
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
@@ -86,12 +84,26 @@ class MainActivity : AppCompatActivity() {
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
 
+//        _taskList = mutableListOf()
+
+        _db = FirebaseDatabase.getInstance().reference
+//        _adapter = TaskAdapter(this, _taskList!!)
+//        listviewTask!!.setAdapter(_adapter)
+
         navView.menu.findItem(R.id.nav_logout).setOnMenuItemClickListener {
 
             Toast.makeText(this, "Logged out!", Toast.LENGTH_SHORT).show()
             app.auth.signOut()
             true
         }
+
+        fab.setOnClickListener {
+            showFooter()
+            btnAdd.setOnClickListener{
+                addTask()
+            }
+        }
+
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
@@ -106,7 +118,15 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+//        _db.orderByKey().addValueEventListener(_taskListener)
     }
+
+//    var _taskListener: ValueEventListener = object : ValueEventListener {
+//        override fun onDataChange(dataSnapshot: DataSnapshot) {
+//            loadTaskList(dataSnapshot)
+//        }
+//    }
 
     override fun onBackPressed() {
         super.onBackPressed()
@@ -328,4 +348,63 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
         }
     }
+
+    fun showFooter(){
+        footer.visibility = View.VISIBLE
+        fab.visibility = View.GONE
+    }
+
+    fun addTask(){
+
+        //Declare and Initialise the Task
+        val task = Task.create()
+
+        //Set Task Description and isDone Status
+        task.taskDesc = txtNewTaskDesc.text.toString()
+        task.done = false
+
+        //Get the object id for the new task from the Firebase Database
+        val newTask = _db.child(Statics.FIREBASE_TASK).push()
+        task.objectId = newTask.key
+
+        //Set the values for new task in the firebase using the footer form
+        newTask.setValue(task)
+
+        //Hide the footer and show the floating button
+        footer.visibility = View.GONE
+        fab.visibility = View.VISIBLE
+
+        //Reset the new task description field for reuse.
+        txtNewTaskDesc.setText("")
+
+        Toast.makeText(this, "Task added! ID: " + task.objectId, Toast.LENGTH_SHORT).show()
+    }
+
+//    private fun loadTaskList(dataSnapshot: DataSnapshot) {
+//        val tasks = dataSnapshot.children.iterator()
+//        if (tasks.hasNext()) {
+//            _taskList!!.clear()
+//
+//            val listIndex = tasks.next()
+//            val itemsIterator = listIndex.children.iterator()
+//
+//            while (itemsIterator.hasNext()) {
+//                val currentItem = itemsIterator.next()
+//                val task = Task.create()
+//                val map = currentItem.getValue() as HashMap&lt; String, Any&gt;
+//
+//                task.objectId = currentItem.key
+//                task.done = map.get("done") as Boolean?
+//                task.taskDesc = map.get("taskDesc") as String?
+//                _taskList!!.add(task)
+//            }
+//        }
+//        _adapter.notifyDataSetChanged()
+//    }
+
+//    override fun onTaskDelete(objectId: String) {
+//        val task = _db.child(Statics.FIREBASE_TASK).child(objectId)
+//        task.removeValue()
+//    }
 }
+

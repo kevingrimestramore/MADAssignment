@@ -8,7 +8,11 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.material.snackbar.Snackbar
+import ie.wit.madassignment.MainActivity
 import ie.wit.madassignment.R
+import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.fragment_notes.*
 
 class NotesFragment : Fragment() {
 
@@ -22,10 +26,8 @@ class NotesFragment : Fragment() {
         notesViewModel =
                 ViewModelProviders.of(this).get(NotesViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_notes, container, false)
-        val textView: TextView = root.findViewById(R.id.text_notes)
-        notesViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+
+
         return root
     }
 }
